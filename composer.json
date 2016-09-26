@@ -6,6 +6,7 @@
         }
     ],
     "require": {
+        "php": ">=5.3.3",
         "carltonsoftware/tabs-api-client": "dev-develop",
         "twig/twig": "~1.0",
         "symfony/filesystem": "3.0.*@dev"

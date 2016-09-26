@@ -1,3 +1,4 @@
 vendor
 vender/
 cache/*
+config.php

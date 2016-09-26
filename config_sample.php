@@ -29,9 +29,18 @@ $feeds = array(
             'collection' => 'tabsxml_feed.html.twig',
             'property' => 'tabsxml_property.html.twig'
         ),
-        'descriptiontype' => 'TABSAFFIL',
+        'descriptiontype' => 'TABSLONG',
         'brands' => array(
             'CD'
+        ),
+        'attributes' => array(
+            'bathrooms' => array(
+                'name' => 'No.of bathrooms'
+            ),
+            'closetocoast' => array(
+                'name' => 'Coastal Cottages',
+                'func' => 'boolToStr'
+            )
         )
     ),
     'eurorelais' => array(
@@ -39,7 +48,7 @@ $feeds = array(
             'collection' => 'eurorelais_feed.html.twig',
             'property' => 'eurorelais_property.html.twig'
         ),
-        'descriptiontype' => 'TABSAFFIL',
+        'descriptiontype' => 'TABSLONG',
         'brands' => array(
             'CD'
         )
