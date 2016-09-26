@@ -1,0 +1,5 @@
+<properties memory="{{ memory }}">
+{% for element in collection %}
+    {{ element|raw }}
+{% endfor %}
+</properties>

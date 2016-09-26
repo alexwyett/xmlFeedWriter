@@ -1,0 +1,53 @@
+<product weboffer="{{ property.isOnSpecialOffer ? 'yes' : 'no' }}" preorder="no" instock="yes" forsale="yes">
+    <pid>{{ property.getPropref }}</pid>
+    <name>
+        <![CDATA[ {{ property.getName }} ]]>
+    </name>
+    <desc>
+        <![CDATA[
+            {{ property.getDescription(brand['descriptiontype']) }}
+        ]]>
+    </desc>
+    <spec>
+        <![CDATA[ {{ property.getAccommodates }} ]]>
+    </spec>
+    <warrenty>
+        <![CDATA[ {{ property.getAddress.getPostcode }} ]]>
+    </warrenty>
+    <promotext>
+        <![CDATA[ 
+            {% for offer in property.getSpecialOffersDescriptions %}
+                <p>{{ offer }}</p>
+            {% endfor %}
+        ]]>
+    </promotext>
+    <modelno>
+        <![CDATA[ {{ property.getArea.getName }} ]]>
+    </modelno>
+    <category>Accommodation</category>
+    <lang>EN</lang>
+    <brand>{{ brand['name'] }}</brand>
+    <purl>
+        <![CDATA[ {{ brand['weburl'] ~ property.getPropref }} ]]>
+    </purl>
+    {% set mainimage = property.getMainImage %}
+    {% if mainimage %}
+        <imgurl>
+            <![CDATA[ {{ mainimage.createImageSrc('square', 1000, 1000) }} ]]>
+        </imgurl>
+        <thumburl>
+            <![CDATA[ {{ mainimage.createImageSrc() }} ]]>
+        </thumburl>
+    {% endif %}
+    <currency>GBP</currency>
+    <price>
+        <actualp>{{ property.getPriceRange.high }}</actualp>
+        <rrpp>{{ property.getPriceRange.high }}</rrpp>
+    </price>
+    <delprice>0</delprice>
+    <stock_quantity>{{ property.getBedrooms }}</stock_quantity>
+    <condition>
+        <![CDATA[ {{ property.getArea.getName }} ]]>
+    </condition>
+    <lastupdate>{{ 'now'|date('U') }}</lastupdate>
+</product>

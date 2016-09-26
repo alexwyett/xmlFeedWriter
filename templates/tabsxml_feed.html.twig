@@ -1,0 +1,5 @@
+<tabsxml total="{{ total }}" memory="{{ memory }}">
+{% for element in collection %}
+    {{ element|raw }}
+{% endfor %}
+</tabsxml>

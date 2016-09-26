@@ -1,0 +1,56 @@
+<property request="dump">
+    <brandcode>{{ property.getBrandcode }}</brandcode>
+    <propref>{{ property.getPropref }}</propref>
+    <url>{{ brand['weburl'] ~ property.getPropref }}</url>
+    <title>{{ property.getName }}</title>
+    <prices currency="GBP">
+        {% for price in property.getDateRangePrices('now'|date('Y')) %}
+            <price from="{{ price.fromDate|date('Y-m-d') }}" till="{{ price.toDate|date('Y-m-d') }}" price="{{ price.price }}" label="{{ price.dateRangeName }}"></price>
+        {% endfor %}
+    </prices>
+    <availability changeday="{{ property.getChangeDayNum }}">
+        {% for period in availableperiods %}
+            <available from="{{ period.from|date('Y-m-d') }}" till="{{ period.till|date('Y-m-d') }}"></available>
+        {% endfor %}
+    </availability>
+    {% set mainimage = property.getMainImage %}
+    {% if mainimage %}
+    <pictures>
+        {% for image in property.getImages %}
+            <picture url="{{ image.createImageSrc('normal', 1000, 1000) }}" main="{{ image.getFilename == mainimage.getFilename ? '1' : '0' }}" />
+        {% endfor %}
+    </pictures>
+    {% endif %}
+    <housenumber></housenumber>
+    <street>{{ property.getAddress.getAddr1 }}</street>
+    <city>{{ property.getAddress.getTown }}</city>
+    <county>{{ property.getAddress.getCounty }}</county>
+    <postcode>{{ property.getAddress.getCounty }}</postcode>
+    <latitude>{{ property.getCoordinates.getLat }}</latitude>
+    <longitude>{{ property.getCoordinates.getLong }}</longitude>
+    <bedrooms>{{ property.getBedrooms }}</bedrooms>
+    <sleeps>{{ property.getAccommodates }}</sleeps>
+    <pets>{{ property.hasPets ? 1 : 0 }}</pets>   
+    <attributes>
+        {% for name,attribute in brand['attributes'] %}
+            <{{ name }}>
+            {% if 'func' in attribute|keys %}
+                {{ include(template_from_string('{{ property.getAttribute(attribute[\'name\']).getValue|' ~ attribute['func'] ~ ' }}')) }}
+            {% else %}
+                {{ property.getAttribute(attribute['name']).getValue|raw }}
+            {% endif %}
+            </{{ name }}>
+        {% endfor %}
+    </attributes>
+    <descriptions>
+        <description language="EN">
+            {{ property.getDescription(feed['descriptiontype']) }}
+        </description>
+        <shortdesc language="EN">
+            {{ property.getDescription(feed['descriptiontype']) }}
+        </shortdesc>
+        <availdesc language="EN">
+            {{ property.getDescription(feed['descriptiontype']) }}
+        </availdesc>
+    </descriptions>
+</property>

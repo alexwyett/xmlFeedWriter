@@ -1,0 +1,17 @@
+<House>
+    <HouseCode>{{ property.getPropref }}</HouseCode>
+    <PlanningRecords>
+        {% for week in property.getPricingWeeks('now'|date('Y')) %}
+            {% if week.weekPrice != 'Unavailable' %}
+                <Planning>
+                    <Period>1w</Period>
+                    <ArrivalDate>{{ week.weekStart }}</ArrivalDate>
+                    <ArrivalTimeFrom>16:00:00</ArrivalTimeFrom>
+                    <ArrivalTimeUntill>17:00:00</ArrivalTimeUntill>
+                    <DepartureTime>10:00:00</DepartureTime>
+                    <Price>{{ week.weekPrice }}</Price>
+                </Planning>
+            {% endif %}
+        {% endfor %}
+    </PlanningRecords>
+</House>
